@@ -1,0 +1,121 @@
+1. In your own words, explain what clean code is and why it is important.
+
+3. I would be more descriptive in writng my code, and maybe break it up into two functions.
+
+FUNCTION convertToCelsius(temp)
+    SET convertedTemp to (temp - 32) * (5/9)
+    PRINT converted temp
+END FUNCTION
+
+FUNCTION convertToFahrenheit(temp)
+    SET convertedTemp to (temp * 1.8 + 32
+    PRINT convertedTemp
+END FUNCTION
+
+4. Would the IF statement makem more sense to start with this statement instead?
+
+IF (total > 0)
+
+5. a. The following function prints the subtotal of a customer's transaction and receives payment accordingly.
+
+FUNCTION getTotal(subTotal, discountRate, paymentType)
+    PRINT "Your total due is: " + subTotal * discountRate + (subTotal * tax)
+END FUNCTION
+
+FUNCTION receivePayment(total, paymentType)
+IF paymentType = 'CASH' THEN
+    CALL getPayment RETURNING amount
+    PRINT "Change due: " + amount - total)
+
+ELSE IF paymentType = 'CREDIT CARD' THEN
+    CALL total RETURNING amount
+    PRINT "Your credit card has been charged: " + total
+END IF
+END FUNCTION
+
+b. The following function checks out a book if there are no issues with the guest's account.
+
+FUNCTION checkoutBook(book, guest)
+    IF (guest.accountActive && NOT(guest.hasOverdueBooks && guest.outstandingFees = 0) THEN
+        APPEND book to guest.books 
+        SET book.status to "Checked Out"
+        PRINT "Your books have been issued."
+    ELSE    
+        PRINT "Unable to check out book."
+    END IF 
+END FUNCTION
+
+c. The following class is a code snippet that should support the transactions a customer can perform at an ATM.
+
+CLASS BankAccount
+
+ FUNCTION displayBalance
+    PRINT balance
+ END FUNCTION
+
+ FUNCTION deposit(amount)
+    SET balance to balance + amount
+ END FUNCTION
+
+ FUNCTION withdraw(amount)
+     IF balance > amount THEN
+       SET balance to balance - amount
+     END
+ END FUNCTION
+
+ FUNCTION offerCreditCard
+     IF NOT(customer.hasCreditCard) THEN
+         CALL creditCardOffer
+     END
+ END FUNCTION
+
+ FUNCTION offerCheckingAccount
+     IF NOT(customer.hasCheckingAccount) THEN
+         CALL checkingAccountOffer
+     END
+ END FUNCTION
+
+ ....
+ ....
+ ....
+
+END
+
+
+Programming Questions
+
+6. Square Given an array of integers, find out whether the sum of the integers is a perfect square. If it is a perfect square,return the square root, otherwise return the sum.
+
+function square(numbers) {
+    let duplicate = false;
+    let sum = 0;
+        for (var i = 0; i < numbers.length; i++) {
+            sum += arr[i];
+        }
+        if (sum > 0 && Math.squrt(sum) % 1 === 0) {
+            let duplicate = true;
+        } else {
+            return sum;
+        }
+}
+
+var numbers = [10,1,4,6,1,1,2];
+square(numbers);
+
+
+7. Duplicate Given an array of integers, find out whether the array contains any duplicate elements. The function should return true if any value appears at least twice in the array, and false if every element is distinct.
+
+function findDuplicates(arr) {
+  arr = arr.sort();
+  let duplicates = false;
+  for(let i=0; i<arr.length; i++){
+    if(arr[i] === arr[i+1]){
+      duplicates = true;
+    }
+  }
+  return duplicates;
+}
+
+console.log(findDuplicates([1,2,3,1]));
+console.log(findDuplicates([1,2,3]));
+console.log(findDuplicates([1,2,3,2,2,2,2,2,2]));
