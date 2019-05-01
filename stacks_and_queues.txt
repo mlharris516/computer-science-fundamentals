@@ -1,0 +1,85 @@
+Exercises
+
+1. What is the main difference between a stack and a queue?
+    The way the data structure is arranged.
+    Stack (LIFO) and Queue (FIFO)
+
+2. What are the similarities between stacks and queues?
+    They both help engineers to organize data, rank tasks, and help support system functions.
+
+3. Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
+    A stack, because you most likely are trying to undo or redo the most recent action that took place in the word processor, meaning the last action would be the first to go.
+
+
+Programming Questions
+
+
+1. Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
+
+var letters = [];
+var original = 'Bloc!';
+var reverse = '';
+
+for (var i = 0; i < original.length; i++) {
+    letters.push(original[i]);
+}
+
+for (var i = 0; i < original.length; i++) {
+    reverse += letters.pop();
+}
+
+console.log(reverse);
+
+
+2. Implement the pop method of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure. Since the internal list is not the same as defined in the checkpoint, it may help to rewrite the pseudocode first.
+
+To delete an item, take all of the elements in the queue one at a time and put them at the end of the queue, except for the last one which should be removed and returned.
+
+ class Stack {
+    constructor(){
+     this.pop = function(queue){
+       var newQueue = [];
+       var itemToRemove = [];
+       
+       for(var i=0;i<queue.length; i++){
+         if(i==queue.length-1){
+           itemToRemove.push(queue[i]);
+         }else{
+           newQueue.push(queue[i]);
+         }
+       }
+       
+       return itemToRemove;   
+       
+     }
+   }
+}
+
+var stack = new Stack();
+console.log(stack.pop('Item'))
+
+3. Implement the enqueue and dequeue methods defined in the checkpoint inside your own Queue class.
+
+class Queue {
+	constructor(items) {
+		this.items = items;
+	}
+
+	enqueue(items) {
+		// this.items.forEach((item) => this.items.push(item));
+		this.items.push(items)
+		return this.items;
+	}
+
+	dequeue() {
+		this.items.splice(0,1);
+		return this.items;
+	}
+
+}
+
+let newLine = new Queue(['Meredith', 'Frankie', 'Patrick']);
+
+newLine.enqueue('Daniel');
+newLine.dequeue();
+console.log(newLine.items)
