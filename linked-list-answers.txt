@@ -1,0 +1,176 @@
+1. What are some pros and cons of using linked lists instead of arrays?
+
+    Pros - The OS can use any available memory location to store nodes, and these lists are able to be great in size.   
+    Cons - They are inefficient to access - you have to start at the very beginning node to find anything.
+
+2. Come up with a real world example of a linked list.
+
+    A digital music playlist
+
+
+Programming Questions
+1. The linked list push function should take a value, create a node, and add it to the end of a list. Below is pseudocode for a push function for a singly linked list. However, there is something wrong with it. Submit both an explanation of the bug and a functional implementation of the method.
+
+//issue with pseudocode: there isn't a way to move from node to node (added a while loop)
+
+
+function push(element) {
+    var length = 0;
+
+    var node = function(element) {
+        this.element = element;
+        this.next = null;
+    };
+
+    this.add = function(element) {
+        var node = new Node(element);
+        if(head === null) {
+            head = node;
+        } else {
+            var currentNode = head;
+            while (currentNode.next) {
+                currentNode = currentNode.next;
+            }
+            currentNode.next = node;
+        }
+        length++;
+    };
+}
+
+2. Given an unsorted singly linked list, remove all duplicates from the linked list.
+
+function LinkedList() {
+  this.head= null;
+  this.length=0;
+}
+
+LinkedList.prototype.push = function(val){  
+    var node = {
+       value: val,
+       next: null
+    }
+  
+    if(!this.head){
+      this.head = node;  
+      this.length += 1;    
+      return node;
+    }
+    else{
+      current = this.head;
+      while(current.next){
+        current = current.next;
+      }
+      current.next = node;
+      this.length += 1;
+      return node;
+    }
+  }
+
+LinkedList.prototype.duplicate = function(){
+ if (!this.head || !this.head.next) {
+      console.log("no duplicates found");
+      return;
+  }
+
+    var thisNode = this.head;
+    while (thisNode != null) {
+      var previousNode = thisNode;
+      var nextNode = thisNode.next;
+      while (nextNode != null) {
+        if (thisNode.value == nextNode.value) {
+          previousNode.next = nextNode.next;
+          this.length --;
+        } else {
+          previousNode = nextNode;
+        }
+        nextNode = nextNode.next;
+      }
+      thisNode = thisNode.next;
+    }
+    return this;
+  }
+
+list= new LinkedList()
+list.push(10);
+list.push(6);
+list.push(20);
+list.push(10);
+list.duplicate();
+
+
+3. Given an unsorted singly linked list, reverse it.
+
+function LinkedList(){
+  this.head= null;
+  this.length=0;
+}
+
+LinkedList.prototype.push = function(val){  
+    var node = {
+       value: val,
+       next: null
+    }
+  
+    if(!this.head){
+      this.head = node;  
+      this.length += 1;    
+      return node;
+    }
+    else{
+      current = this.head;
+      while(current.next){
+        current = current.next;
+      }
+      current.next = node;
+      this.length += 1;
+      return node;
+    }
+  }
+
+LinkedList.prototype.duplicate = function(){
+ if (!this.head || !this.head.next) {
+      console.log("no duplicates");
+  }
+
+    var thisNode = this.head;
+    while (thisNode != null) {
+      var previousNode = thisNode;
+      var nextNode = thisNode.next;
+      while (nextNode != null) {
+        if (thisNode.value == nextNode.value) {
+          previousNode.next = nextNode.next;
+          this.length --;
+        } else {
+          previousNode = nextNode;
+        }
+        nextNode = nextNode.next;
+      }
+      thisNode = thisNode.next;
+    }
+    return this;
+  }
+
+LinkedList.prototype.reverse= function() {
+    var previousNode = null;
+    var thisNode = this.head;
+    var nextNode;
+
+    while (thisNode) {
+      nextNode = thisNode.next;
+      thisNode.next = previousNode;
+      previousNode = thisNode;
+      thisNode = nextNode;
+    }
+
+    this.head = previousNode;
+  }
+
+
+   
+list= new LinkedList();
+list.push(9);
+list.push(8);
+list.push(7);
+list.push(6);
+list.reverse();
+
