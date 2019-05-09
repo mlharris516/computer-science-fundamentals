@@ -1,0 +1,43 @@
+1. Using proper pseudo-code, describe the following primitive algorithms:
+
+    MAKING COFFEE
+
+    FILL kettle with water to desired level
+    HEAT kettle on stovetop to boil
+    INSERT coffee grounds into french press
+    POUR boiling water to top of french press
+    COVER with lid for 5 minutes
+    PRESS down handle to separate grounds from liquid
+    POUR coffee into desired container
+
+
+    WASHING DISHES
+
+    FILL sink with hot and soapy water
+    SCRUB dirty dish with abrasive material
+    RINSE dish with clean water
+    WIPE dry with clean towel
+
+
+    PROCESS FLORAL SHIPMENT
+
+    REMOVE floral items from shipping box
+    FILL bucket with water and preservative
+    REMOVE leaves from stems
+    CUT one inch off bottom of stems
+    PLACE floral items into bucket 
+    
+
+
+2. As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
+
+    Spotify - created a platform for affordable music with easy to use software and almost limitless musical options.
+
+    Modern 3-point seat belt by Nils Bohlin - invented a much safer and more effective seat belt, which was later available for all manufacturers to use, ultimately saving many more lives.
+
+    Waze - a maps-like app, but better solves the everyday problem of cutting the time down on a driving destination, not just choosing the shortest distance. 
+
+
+3. Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+
+An efficient algorithm would need to solve a problem, in as few steps as possible, and could possibly be used repeatedly. In contrast, I imagine an inefficient algorithm would spend too much time working a problem, or might only have limited use.
