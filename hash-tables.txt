@@ -161,59 +161,86 @@ var hash = (string, max) => {
 
 3. Create a hash table that allows digital copies of newspapers to be entered and searched by publisher and publication date.
 
-var hash = (string, max) => {
+function hash(key, size){
     var hash = 0;
-    for (var i = 0; i < string.length; i++) {
-      hash += string.charCodeAt(i);
+    for(var i = 0; i < key.length; i++){
+      hash += key.charCodeAt(i);
     }
-    return hash % max;
-  };
   
-  let HashTable = function() {
+    return hash % size;
+  }
   
-    let storage = [];
-    const storageLimit = 100;
+  function hashTableByPublisher(){
+    var container = [];
+    var containerCap = 577;
   
-    this.add = function(key,value) {
-      var index = hash(key, storageLimit);
-      if (storage[index] === undefined) {
-        storage[index] = [
-          [key,value]
-        ];
-      } else {
-        var inserted = false;
-        for (var i = 0; i < storage[index].length; i++) {
-          if (storage[index][i][0] === key) {
-            storage[index][i][1] = value;
-            inserted = true;
-          }
-        }
-        if (inserted === false) {
-          storage[index].push([key,value]);
-        }
+    this.set = function(publisher, date, article){
+      var index = hash(publisher, containerCap);
+  
+      if(container[index] === undefined){
+        container[index] = [ [publisher, date, article] ];
       }
     };
   
-    this.lookup = function(key) {
-      var index = hash(key, storageLimit);
-      if (storage[index] === undefined) {
-        return undefined;
+    this.get = function(publisher){
+      var index = hash(publisher, containerCap);
+  
+      if(container[index] === undefined) {
+          return "The publisher list is empty";
       } else {
-        for (var i = 0; i < storage[index].length; i++) {
-          if (storage[index][i][0] === key) {
-            return storage[index][i][1];
+          for(var i = 0; i < container[index].length; i++) {
+            if(container[index][i][0] === publisher) {
+                return "Publisher: " + container[index][i][0] + ", date published: " + container[index][i][1] + ", article: " + container[index][i][2];
+            } else {
+              return "publisher not found";
+            }
           }
-        }
+      } 
+    };
+  }
+  
+  function hashTableByDate(){
+    var container = [];
+    var containerCap = 577;
+  
+    this.set = function(publisher, date, article){
+      var index = hash(date, containerCap);
+  
+      if(container[index] === undefined){
+        container[index] = [ [publisher, date, article] ];
       }
     };
   
-  };
+    this.get = function(date){
+      var index = hash(date, containerCap);
   
-  var newspaperList = new HashTable();
-  newspaperList.add('Blah Times', '1989');
-  newspaperList.add('Blues Banter', '1990');
-  newspaperList.add('SkyMall Review', '2001');
+      if(container[index] === undefined) {
+          return "The article list is empty";
+      } else {
+          for(var i = 0; i < container[index].length; i++) {
+            if(container[index][i][1] === date) {
+                return "Publisher: " + container[index][i][0] + ", date published: " + container[index][i][1] + ", article: " + container[index][i][2];
+            } else {
+              return "date not found";
+            }
+          }
+      } 
+    };
+  }
   
-  console.log(newspaperList.lookup('Blah Times', '1989'));
-  console.log(newspaperList.lookup('Blues Banter', '1990'));
-  console.log(newspaperList.lookup('SkyMall Review', '2001'));
+  var article = new hashTableByPublisher();
+  var articleDate = new hashTableByDate();
+  
+  article.set("Blah Times", "1989", "blahblahblah");
+  article.set("Blues Banter", "1990", "blues blues blues");
+  article.set('SkyMall Review', '2001', "great pizza shaped tie");
+  
+  articleDate.set("Blah Times", "1989", "blahblahblah");
+  articleDate.set("Blues Banter", "1990", "blues blues blues");
+  articleDate.set('SkyMall Review', '2001', "great pizza shaped tie");
+  
+  console.log(article.get("Blah Times"));
+  console.log(articleDate.get("2001"));
+  console.log(article.get("Text Article"));
+  console.log(articleDate.get("2019"))
+  
