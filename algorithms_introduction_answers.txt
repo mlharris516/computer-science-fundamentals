@@ -2,30 +2,45 @@
 
     MAKING COFFEE
 
-    FILL kettle with water to desired level
-    HEAT kettle on stovetop to boil
-    INSERT coffee grounds into french press
-    POUR boiling water to top of french press
-    COVER with lid for 5 minutes
-    PRESS down handle to separate grounds from liquid
-    POUR coffee into desired container
+    FUNCTION makeCoffee
+        IF coffee beans whole
+            CALL grindCoffeeBeans
+        END IF
+        ADD water to kettle
+        SET kettle to on
+        IF waterBoiling
+            SET kettle to off
+        END IF
+        ADD coffee beans to french press
+        ADD water to french press
+        IF waitTime >= 5 min 
+            SERVE coffee
+        ELSE wait
+    END FUNCTION
 
 
     WASHING DISHES
 
-    FILL sink with hot and soapy water
-    SCRUB dirty dish with abrasive material
-    RINSE dish with clean water
-    WIPE dry with clean towel
+    FUNCTION washDishes
+        IF dishDirty = true
+            CALL addToDishwasher
+        
+        IF dishwasherFull = true
+            CALL addDetergent
+            CALL startDishwasher
+    END FUNCTION
 
 
     PROCESS FLORAL SHIPMENT
 
-    REMOVE floral items from shipping box
-    FILL bucket with water and preservative
-    REMOVE leaves from stems
-    CUT one inch off bottom of stems
-    PLACE floral items into bucket 
+    FUNCTION processFloral
+        IF newFLoral = true 
+            CALL fillBuckets
+        
+        IF filledBuckets = true
+            CALL chopStems
+            ADD floral to buckets
+    END FUNCTION
     
 
 
