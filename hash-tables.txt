@@ -40,14 +40,6 @@ Programming Questions
 
 1. Create a hash table that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers.
 
-var hash = (string, max) => {
-    var hash = 0;
-    for (var i = 0; i < string.length; i++) {
-      hash += string.charCodeAt(i);
-    }
-    return hash % max;
-  };
-  
   let HashTable = function() {
   
     let storage = [];
@@ -161,86 +153,55 @@ var hash = (string, max) => {
 
 3. Create a hash table that allows digital copies of newspapers to be entered and searched by publisher and publication date.
 
-function hash(key, size){
-    var hash = 0;
-    for(var i = 0; i < key.length; i++){
-      hash += key.charCodeAt(i);
+
+let hash = (string, max)=> {
+  var hash = 0;
+  for(var i=0; i< string.length;i++){
+    hash+= string.charCodeAt(i);
+  }
+  return hash % max;
+}
+
+class Article {
+  constructor() {
+    this.storage = [];
+    this.storageLimit = 60;
+  }
+
+  add(publisher, pubDate) {
+    let key = publisher + pubDate;
+    let index = hash(key, this.storageLimit);
+    let data = [publisher, pubDate];
+      if (this.storage[index] === undefined) {
+        this.storage[index] = [ ];
+    } 
+    this.storage[index].push(data);
     }
-  
-    return hash % size;
-  }
-  
-  function hashTableByPublisher(){
-    var container = [];
-    var containerCap = 577;
-  
-    this.set = function(publisher, date, article){
-      var index = hash(publisher, containerCap);
-  
-      if(container[index] === undefined){
-        container[index] = [ [publisher, date, article] ];
+
+  search(publisher, pubDate) {
+    let key = publisher + pubDate;
+    let index = hash(key, this.storageLimit);
+    let result = [];
+    
+    if (!this.storage[index]) { return 'No results were found for this search' }
+      this.storage[index].forEach(entry => {
+       if (entry[0] === publisher && entry[1] === pubDate) { 
+        result.push(entry); 
       }
-    };
-  
-    this.get = function(publisher){
-      var index = hash(publisher, containerCap);
-  
-      if(container[index] === undefined) {
-          return "The publisher list is empty";
-      } else {
-          for(var i = 0; i < container[index].length; i++) {
-            if(container[index][i][0] === publisher) {
-                return "Publisher: " + container[index][i][0] + ", date published: " + container[index][i][1] + ", article: " + container[index][i][2];
-            } else {
-              return "publisher not found";
-            }
-          }
-      } 
-    };
+    })
+    return result;
   }
-  
-  function hashTableByDate(){
-    var container = [];
-    var containerCap = 577;
-  
-    this.set = function(publisher, date, article){
-      var index = hash(date, containerCap);
-  
-      if(container[index] === undefined){
-        container[index] = [ [publisher, date, article] ];
-      }
-    };
-  
-    this.get = function(date){
-      var index = hash(date, containerCap);
-  
-      if(container[index] === undefined) {
-          return "The article list is empty";
-      } else {
-          for(var i = 0; i < container[index].length; i++) {
-            if(container[index][i][1] === date) {
-                return "Publisher: " + container[index][i][0] + ", date published: " + container[index][i][1] + ", article: " + container[index][i][2];
-            } else {
-              return "date not found";
-            }
-          }
-      } 
-    };
-  }
-  
-  var article = new hashTableByPublisher();
-  var articleDate = new hashTableByDate();
-  
-  article.set("Blah Times", "1989", "blahblahblah");
-  article.set("Blues Banter", "1990", "blues blues blues");
-  article.set('SkyMall Review', '2001', "great pizza shaped tie");
-  
-  articleDate.set("Blah Times", "1989", "blahblahblah");
-  articleDate.set("Blues Banter", "1990", "blues blues blues");
-  articleDate.set('SkyMall Review', '2001', "great pizza shaped tie");
-  
-  console.log(article.get("Blah Times"));
-  console.log(articleDate.get("2001"));
-  console.log(article.get("Text Article"));
-  console.log(articleDate.get("2019"))
+}
+
+
+let article = new Article();
+article.add('Blah Times', '1989');
+article.add('Blues Banter', '1990');
+article.add('Skymall Review','2001');
+
+
+console.log(article.search('Blah Times', '1989'));
+console.log(article.search('Blues Banter', '1990'));
+console.log(article.search('Skymall Review','2001'));
+console.log(article.search('Test Article', '1930'));
   
