@@ -1,0 +1,75 @@
+Exercises
+
+1. Define and compare recursion and iteration.
+
+    Iteration - repeating a process by using a loop
+    Recursion - a function calls itself to incrementally work toward a base case - are usually slower and more limited than iterative solutions, but usually easier to implement
+
+2. Name five algorithms that are commonly implemented by recursion.
+
+    binary search, merge sort, quick sort, factorial operation, Fibonacci seaquence
+
+3. When should you use recursion, and when should you avoid recursion? Give examples for each.
+
+    Recursion is much less efficient, especially when dealing with large amounts of data, and is at a high risk for stack overflow. It's best to use for problems that have a treelike structure like binary search trees and merge sorts, or can be broken down into smaller problems starting with known cases.
+
+    The Fibonacci sequence example works in the early stages with recursion, but as the number gets much larger it might be more suited to an iterative solution.
+
+    Loops are best suited for running through sets of data like in finding the maximum number of a collection.
+
+
+4. Compare the recursive and iterative solutions to the three algorithms from the checkpoint (factorial, maximum, and fibonacci). What is similar, and what is different?
+
+    Factorial - in both the recursive and iterative solutions, the function starts with an error if the number is below zero. In the recursive option, it begins with definining a base case and if necessary,moves forward with calling the factorial function multiple times starting with the number given, and working its way down until the number produces the error. In the iterative solution, we use a variable called result that keeps track of the calculations we make in the for loop. The for loop then starts at the given number, and works its way down to 2, and then stops.
+
+    Maximum - the recursive solution is much more complicated than the iterative solution. It needs to specifically account for scenarios where there is an empty collection, or a collection containing only one item. Both solutions start with setting a potential maximum number as the first in the collection.
+
+    Fibonacci - While the recursive solution specifically accounts for base cases when the number is negative, 1 or 2, the iterative loop simply starts at the number 3. Both solutions find the 2 numbers,add them together, and return the next number in the fibonacci sequence.
+
+5. Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, write a recursive algorithm to count the number of items in the entire collection.
+
+    let array = ["banana", "apple", "orange"];
+
+    function itemsInArray(array) {
+        if(array.length === 0) {
+            return 0
+        } else if (array.length === 1) {
+            return 1
+        } else {
+            let items = 0
+            for (let i = 0; i < array.length; i++) {
+                if(array.isArray(array[i])) {
+                items += totalItems(array[i]) 
+            } else {
+                items++
+            }
+            }
+            return items
+        }
+    }
+    console.log(itemsInArray(array));   
+
+
+
+6. A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). Write a recursive algorithm to determine if a given word or phrase is a palindrome.
+
+let word1 = "racecar";
+
+function palindromeTest(word) {
+  let word2 = word1.toLowerCase()
+  if (word2.length === 0 || word2.length === 1) {
+    return true
+  } else if (word2[0] === word2[word2.length - 1]){ 
+    let newWord = word2.slice(1, word2.length - 1)
+    return palindrome(newWord)
+  }
+  return false
+}
+
+
+console.log(palindromeTest(word1));
+
+
+7. Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". Explain why this behavior exhibits properties of recursion.
+
+Clicking the prompt would then have you calling the same action repeatedly, like a recursive function calls itself over and over again.
