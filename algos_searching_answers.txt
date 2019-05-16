@@ -1,0 +1,72 @@
+Short Answer
+
+1. What is a real-life scenario that uses linear search?
+
+Find an listing in a phone book.
+
+2. What is a real-life scenario that uses binary search?
+
+Find a book in a library, each book can be found by the row, and exact point in the dewey decimal system.
+
+3. Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using linear search?
+
+seven iterations
+
+4. Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using binary search?
+
+three iterations
+
+5. Given an unsorted collection of a million items, which algorithm would you choose between linear search and binary search? Explain your reasoning.
+
+Linear, because a binary search cannot work wiht an unsorted collection.
+
+6. Given a sorted collection of a million items, which algorithm would you choose between linear search and binary search? Explain your reasoning.
+
+Binary search, because from the beginning, the first iteration could eliminate half a million items, and each iteration would keep eliminating large chunks of items, making it a much faster process than a linear search.
+
+
+Programming Assignment
+
+1. You and a friend have set a wager to see who can find the word "Albatross" in the dictionary the fastest. Write a program to allow you to win the bet.
+
+let words = ["Aardvark", "Aid", "Albatross", "Bingo", "Bongo", "Cut", "Detail", "English"];
+
+function dictionarySearch(arr, word){ 
+  var low = arr[0]; //set low to index of first item in collection
+  var high = arr[arr.length -1]; //set high to last item in collection
+
+  while (low < high) { //loop will run as long as low is less than high
+    var mid = (arr.indexOf(low) + arr.indexOf(high)) / 2; //find the midpoint of the collection
+    mid = Math.round(mid); //get rid of decimals
+    
+    if(arr[mid] > word) { //if the midpoint is larger than the word looking for
+      high = arr[mid -1]; //set high to one less than the midpoint to ignore upper half
+    } 
+    else if (arr[mid] < word) { //if the midpoint is less than the word looking for
+      low = arr[mid + 1]; //set low to one greater than the midpoint to ignore the lower half
+    }
+    else { //if the midpoint is neither greater than or less than the word looking for, it must be equal value
+      return arr[mid];
+    }
+  }
+  return "Word not found";
+}
+
+console.log(dictionarySearch(words, "Albatross"));
+
+2. You work at a pet store, and a child has asked you to net the only white-spotted goldfish from the fish tank. Write a program that will help you net the right fish.
+
+
+var fishTank = ["Gold", "White-Spotted", "Snail", 
+			"Bug-Eyed Gold"];
+
+function findFish(arr, target){
+  for(var i = 0; i < arr.length; i++){
+    if (arr[i] === target){
+      return "White-Spotted Goldfish found";
+    }
+  }
+  return "White-Spotted Goldfish not found";
+}
+
+console.log(findFish(fishTank, "White-Spotted"));
