@@ -38,7 +38,7 @@ Exercises
         } else {
             let items = 0
             for (let i = 0; i < array.length; i++) {
-                if(array.isArray(array[i])) {
+                if(Array.isArray(array[i])) {
                 items += totalItems(array[i]) 
             } else {
                 items++
@@ -53,10 +53,10 @@ Exercises
 
 6. A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). Write a recursive algorithm to determine if a given word or phrase is a palindrome.
 
-let word1 = "racecar";
+let word = "racecar";
 
-function palindromeTest(word) {
-  let word2 = word1.toLowerCase()
+function palindrome(word) {
+  let word2 = word.toLowerCase()
   if (word2.length === 0 || word2.length === 1) {
     return true
   } else if (word2[0] === word2[word2.length - 1]){ 
@@ -66,8 +66,7 @@ function palindromeTest(word) {
   return false
 }
 
-
-console.log(palindromeTest(word1));
+console.log(palindrome(word));
 
 
 7. Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". Explain why this behavior exhibits properties of recursion.
