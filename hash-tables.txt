@@ -178,7 +178,7 @@ class Article {
     this.storage[index].push(data);
     }
 
-  search(publisher, pubDate, content) {
+  search(publisher, pubDate) {
     let key = publisher + pubDate;
     let index = hash(key, this.storageLimit);
     let result = [];
@@ -195,13 +195,14 @@ class Article {
 
 
 let articles = new Article();
-articles.add('Blah Times', '1989', 'blahblahblah');
-articles.add('Blues Banter', '1990', 'i got the blues');
-articles.add('Skymall Review','2001', 'great pizza shaped umbrellas');
+articles.add('Blah Times', '1989', {title:'blahblahblah', editor:'Bob'});
+articles.add('Blues Banter', '1990', {title:'i got the blues', editor:'John Smith'});
+articles.add('Skymall Review','2001', {title:'great pizza shaped umbrellas', editor:'Nancy K.'});
 
 
 console.log(articles.search('Blah Times', '1989'));
 console.log(articles.search('Blues Banter', '1990'));
 console.log(articles.search('Skymall Review','2001'));
 console.log(articles.search('Test Article', '1930'));
+  
   
