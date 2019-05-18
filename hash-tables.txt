@@ -168,17 +168,17 @@ class Article {
     this.storageLimit = 60;
   }
 
-  add(publisher, pubDate) {
+  add(publisher, pubDate, content) {
     let key = publisher + pubDate;
     let index = hash(key, this.storageLimit);
-    let data = [publisher, pubDate];
+    let data = [publisher, pubDate, content];
       if (this.storage[index] === undefined) {
         this.storage[index] = [ ];
     } 
     this.storage[index].push(data);
     }
 
-  search(publisher, pubDate) {
+  search(publisher, pubDate, content) {
     let key = publisher + pubDate;
     let index = hash(key, this.storageLimit);
     let result = [];
@@ -194,14 +194,14 @@ class Article {
 }
 
 
-let article = new Article();
-article.add('Blah Times', '1989');
-article.add('Blues Banter', '1990');
-article.add('Skymall Review','2001');
+let articles = new Article();
+articles.add('Blah Times', '1989', 'blahblahblah');
+articles.add('Blues Banter', '1990', 'i got the blues');
+articles.add('Skymall Review','2001', 'great pizza shaped umbrellas');
 
 
-console.log(article.search('Blah Times', '1989'));
-console.log(article.search('Blues Banter', '1990'));
-console.log(article.search('Skymall Review','2001'));
-console.log(article.search('Test Article', '1930'));
+console.log(articles.search('Blah Times', '1989'));
+console.log(articles.search('Blues Banter', '1990'));
+console.log(articles.search('Skymall Review','2001'));
+console.log(articles.search('Test Article', '1930'));
   
