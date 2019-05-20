@@ -28,26 +28,19 @@ Exercises
 
 5. Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, write a recursive algorithm to count the number of items in the entire collection.
 
-    let array = ["banana", "apple", "orange"];
+ var itemsInArray = (array)=>{
+      let items =0;
+   for (var i=0; i <array.length; i++){
+     if (typeof array[i] === "object"){
+         items += itemsInArray(array[i]);
+     }else{ 
+       items++;
+     }
+   } 
+    return items;
+  }
 
-    function itemsInArray(array) {
-        if(array.length === 0) {
-            return 0
-        } else if (array.length === 1) {
-            return 1
-        } else {
-            let items = 0
-            for (let i = 0; i < array.length; i++) {
-                if(Array.isArray(array[i])) {
-                items += totalItems(array[i]) 
-            } else {
-                items++
-            }
-            }
-            return items
-        }
-    }
-    console.log(itemsInArray(array));   
+  console.log(itemsInArray([14,2,[2,1,5]]));
 
 
 
