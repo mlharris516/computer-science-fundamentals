@@ -2,17 +2,61 @@ Exercises
 
 1. Implement a solution for bubble sort.
 
-var array = [4, 2, 9, 10, 8, 1, 3, 7, 6, 5];
+values = [9, 2, 8, 23, 99, 12, 1, 3, 5];
 
-function swap(array, i, j) {
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-
+function sort(values) {
+    var origVal = values.slice();
+    var length = origVal.length - 1;
+    do {
+        var swapped = false;
+        for(var i = 0; i < length; ++i) {
+            if (origVal[i] > origVal[i + 1]) {
+                var temp = origVal[i];
+                origVal[i] = origVal[i + 1];
+                origVal[i +1] = temp;
+                swapped = true;
+            }
+        }
+    }
+    while(swapped === true);
+    return origVal
 }
+
+console.log(sort(values));
+
 
 2. Write pseudocode for quicksort.
 
+FUNCTION quickSort(collecton)
+
+    IF collection length <= 1 THEN
+        RETURN collection
+    ELSE
+        SET left, right to empty arrays
+        SET pivot to last item in collection
+        SET length to length of collection
+
+        FOR i = 0 to length -1
+            IF collection[i] <= pivot
+                PUSH collection[i] to last index of left
+            ELSE
+                PUSH collection[i] to last index of right
+            END IF
+        END FOR
+        RETURN quickSort(left).concat(pivot, quickSort(right));
+    END IF
+END FUNCTION
+
+
+
 3. We talked about time complexity in a previous checkpoint, and how to get an idea of the efficiency of an algorithm. After looking at the pseudocode for the above sorting methods, identify why merge sort and quick sort are much more efficient than the others. Walking through each algorithm with a few sample collections may help.
 
+Quick Sort looks at values and determines if they are greater than or less than the pivot point. It is efficient because it keeps getting divided and sorted into more manageable sub-lists until it cannot be divided any further. The recursive nature of the sub-list division keeps the code simpler and more efficient.
+
+Merge Sort also recursivelyu breaks down a larger sorting problem into more manageable sets, and then once individually sorted, are merged back together as a complete, sorted list, which helps its efficiency.
+
 4. All of the sorts addressed in this checkpoint are known as comparison sorts. Research bucket sort and explain how it works. What is the ideal input for bucket sort?
+
+Bucket Sort - also known as a distribution sort, the bucket sort distributes elements of an array into buckets, where they can be individually sorted. The individual sorting can be accomplished either by recursively applying the bucket sort until all pieces are sorted, or by using another sorting algorithm entirely. After each bucket has been sorted, the buckets are then placed in order. 
+
+    Ideal input - uniform distribution of values, with a relatively easy way to choose buckets based on the input array.
