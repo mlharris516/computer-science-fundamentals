@@ -1,0 +1,169 @@
+Exercises
+
+1. What is a binary tree and what makes it unique to other trees?
+
+In binary trees, each node can only have up to two child nodes, a right and a left. The left child node is less than or equal to the parent node, while the right node is greater than or equal to the parent node.
+
+2. What is a heuristic?
+
+An algorithm that makes guesses while sacrificing accuracy in favor of solving the problem faster.
+
+3. What is another problem besides the shortest-path problem that requires the use of heuristics?
+
+Some antivirus software - scanning for patterns tha are common to a type of virus, with different sets of rules for different viruses.
+
+4. What is the difference between a depth-first search and a breadth-first search?
+
+DFS - the algorithm will search starting at the root, and down as far as possible along a branch, will backtrack to the root, and search all the way down the next branch.
+BFS - the algorithm will search across the first row of child nodes from the parent, before moving to the next tier down.
+
+5. Explain in your own words what an undirected, a-cyclic, unweighted graph is. 
+
+Undirected - the relationship between each node doesn't suggest a direction of flow. They are simply connected, but neither the start or the end.
+A-cyclic - the nodes do not form loops based on a direction of pointing to each other.
+Unweighted - each connection between nodes has not been assigned an associated "weight" that represents the cost of the time it takes to travel from one to the next
+
+6. What kind of graph is a binary search tree?
+
+A-cyclic, unweighted, ordered
+
+
+
+Programming Questions
+
+1. Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+
+isPresent(data) {
+    let current = this.root;
+    while(current) {
+        if (data === current.data {
+            return true;
+        }
+        if (data < current.data) {
+            current = current.left;
+        } else {
+            current = current.right;
+        }
+    }
+    return false;
+}
+
+
+2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+
+FUNCTION findDistanceBetween(val1, val2)
+    find lowest common ancestor node of val1 and val2 and set it to LCA
+    find distance from LCA to val1 and set it to distance1
+    find distance from LCA to val2 and set it to distance2
+    return sum of distance1 nd distance2
+END FUNCTION
+
+class Node {
+  constructor(data, left = null, right = null) {
+    this.data = data;
+    this.left = left;
+    this.right = right;
+  }
+}
+
+class BST {
+  constructor() {
+    this.root = null;
+  }
+  add(data) {
+    const node = this.root;
+    if (node === null) {
+      this.root = new Node(data);
+      return;
+    } else {
+      const searchTree = function(node) {
+        if (data < node.data) {
+          if (node.left === null) {
+            node.left = new Node(data);
+            return;
+          } else if (node.left !== null) {
+            return searchTree(node.left);
+          }
+        } else if (data > node.data) {
+          if (node.right === null) {
+            node.right = new Node(data);
+            return;
+          } else if (node.right !== null) {
+            return searchTree(node.right);
+          }
+        } else {
+          return null;
+        }
+      };
+      return searchTree(node);
+    }
+  }
+  
+  find(data) {
+    let current = this.root;
+    while (current.data !== data) {
+      if (data < current.data) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+      if (current === null) {
+        return null;
+      }
+    }
+    return current;
+  }
+  
+    getDistance(node1, node2) {
+    var root = this.root;
+    var ancestor = LCA(root, node1, node2);
+    var depth1 = getDepth(ancestor, node1); 
+    var depth2 = getDepth(ancestor, node2); 
+  
+    function LCA(currentNode, node1, node2) {
+      if (currentNode == null)
+        return null;
+      if (currentNode.data == node1 || currentNode.data == node2)
+        return currentNode;
+      var left = LCA(currentNode.left, node1, node2); 
+      var right = LCA(currentNode.right, node1, node2); 
+      if(left != null && right != null)
+        return currentNode;
+      return left == null? right: left;
+      }
+
+    function getDepth(currentNode, targetNode) {
+      if (currentNode == null)
+        return -1;
+      if (currentNode.data == targetNode)
+        return 0;
+      var left = getDepth(currentNode.left, targetNode);
+      var right = getDepth(currentNode.right, targetNode);
+      if (left == -1 && right == -1)
+        return -1;
+      return left == -1? right + 1: left + 1;
+    }
+    return depth1 +  depth2;
+  }
+}
+
+
+
+const bst = new BST();
+
+bst.add(9);
+bst.add(4);
+bst.add(17);
+bst.add(3);
+bst.add(6);
+bst.add(22);
+bst.add(5);
+bst.add(7);
+bst.add(20);
+
+console.log(bst.getDistance(9, 4));
+console.log(bst.getDistance(4, 22));
+console.log(bst.getDistance(17, 3));
+
+
+
